@@ -91,6 +91,10 @@ and doing are separate turns.
 
 ## Known rough edges
 
+**Not yet run against a live Scout.** Written from Microsoft's published docs —
+the M365 tool reach, heartbeat policy, and sensitivity-label behaviour are
+reasoned rather than observed. Published as `beta` for that reason.
+
 - "Related documents" leans on title matching, so a well-named doc gets found
   and a `Untitled-3.docx` does not.
 - 30 days back is arbitrary. Long-running projects with a quiet month will lose
