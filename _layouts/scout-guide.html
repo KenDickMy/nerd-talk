@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<article class="article">
+  <header class="article__header">
+    <div class="kicker">
+      <a class="kicker__link" href="{{ '/scout/guides/' | relative_url }}">// Scout Guide{% if page.level %} · {{ page.level }}{% endif %}</a>
+    </div>
+    <h1 class="display article__title">{{ page.title }}</h1>
+    {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
+    <div class="article__meta">
+      <span>{% include reading-time.html content=page.content %}</span>
+      {% if page.updated %}<span class="sep">/</span><time datetime="{{ page.updated | date_to_xmlschema }}">Updated {{ page.updated | date: "%b %Y" }}</time>{% endif %}
+    </div>
+  </header>
+
+  <div class="prose">
+    {{ content }}
+  </div>
+
+  <footer class="article__footer">
+    <a class="btn btn--ghost" href="{{ '/scout/guides/' | relative_url }}">&larr; All Scout guides</a>
+  </footer>
+</article>

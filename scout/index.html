@@ -1,0 +1,56 @@
+---
+layout: default
+title: Microsoft Scout Skills
+permalink: /scout/
+description: >-
+  A catalog of custom skills for Microsoft Scout — the desktop agent that reaches
+  your files, shell, browser, and Microsoft 365 — plus guides on the format.
+---
+
+<section class="hero hero--tight">
+  <div class="kicker">// Microsoft Scout</div>
+  <h1 class="display">Scout <span class="accent">Skills</span></h1>
+  <p>{{ page.description }}</p>
+</section>
+
+{% include skills-subnav.html base="/scout" label="All skills" %}
+
+<div class="notice notice--lead">
+  <strong>These are not Claude skills.</strong> Scout's <code>SKILL.md</code> takes
+  <code>description</code> alone — no <code>name</code>, no <code>allowed-tools</code> — and permissions
+  come from a global three-tier system rather than a per-skill list. Copying a Claude skill across gives
+  you a guardrail that isn't there.
+  <a href="{{ '/scout/guides/scout-vs-claude-skills/' | relative_url }}">What actually differs &rarr;</a>
+</div>
+
+<section class="cat-grid">
+  {% for cat in site.data.scout_categories %}
+    {% assign count = site.scout_skills | where: "category", cat.slug | size %}
+    <a class="cat-card" href="{{ '/scout/categories/' | append: cat.slug | append: '/' | relative_url }}">
+      <svg class="cat-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+        <path d="{{ cat.icon }}"/>
+      </svg>
+      <h2 class="cat-card__name">{{ cat.name }}</h2>
+      <p class="cat-card__blurb">{{ cat.blurb }}</p>
+      <span class="cat-card__count">{{ count }} skill{% unless count == 1 %}s{% endunless %}</span>
+    </a>
+  {% endfor %}
+</section>
+
+<section class="section">
+  <h2 class="section__head">Every skill</h2>
+  <div class="skill-grid">
+    {% assign all_scout = site.scout_skills | sort: "title" %}
+    {% for skill in all_scout %}
+      {% include skill-card.html skill=skill base="/scout" categories=site.data.scout_categories %}
+    {% else %}
+      <p class="card__excerpt">No Scout skills published yet.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="callout">
+  <h2 class="callout__title">Also writing for Claude?</h2>
+  <p>The general principles carry over — progressive disclosure, procedures over vibes, descriptions that actually trigger. The format and the guardrails do not.</p>
+  <a class="btn" href="{{ '/skills/' | relative_url }}">Claude skill library &rarr;</a>
+</section>

@@ -629,3 +629,28 @@ a.chip:hover { color: var(--cp-accent); border-color: var(--cp-accent); }
 @media (max-width: 640px) {
   .skill-grid, .cat-grid { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   Notice — format caveats, platform differences
+   ========================================================================== */
+
+.notice {
+  border: 2px solid var(--cp-text);
+  border-left-width: 8px;
+  border-left-color: var(--cp-accent);
+  background: var(--cp-surface);
+  padding: 16px 20px;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--cp-muted);
+  margin-bottom: 34px;
+}
+.notice strong { color: var(--cp-text); }
+.notice code {
+  font-size: 0.85em;
+  background: var(--cp-accent-soft);
+  border: 1px solid var(--cp-line);
+  padding: 1px 5px;
+}
+.notice a { white-space: nowrap; }
+.notice--lead { margin-bottom: 40px; }
