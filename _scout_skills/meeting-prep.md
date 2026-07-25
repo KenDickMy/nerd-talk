@@ -4,7 +4,7 @@ description: >-
   Briefs you before a meeting — who's attending, what they've said recently across
   mail and Teams, which documents are in play, and what you still owe them.
 category: microsoft-365
-status: stable
+status: beta
 version: 0.1.0
 updated: 2026-02-19
 tier: user or workspace
@@ -235,6 +235,13 @@ not up front. `reference/heartbeat.md` covers running it as a recurring
 check-in, and is only read if you ask about scheduling.
 
 ## Known rough edges
+
+**It hasn't been run against a live Scout yet.** This was written from
+Microsoft's published documentation — the M365 tool reach, the heartbeat
+policy, and the sensitivity-label behaviour are all reasoned from the docs
+rather than observed in practice. The procedure is sound on paper; expect the
+first real run to surface things paper doesn't. Marked `beta` for that reason,
+and it'll move to `stable` once it's actually done a week of mornings.
 
 - "Related documents" leans on title matching. A well-named doc gets found;
   `Untitled-3.docx` doesn't.
