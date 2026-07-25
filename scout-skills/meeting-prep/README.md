@@ -8,14 +8,31 @@ anything.
 
 ## Install
 
+No clone needed — this pulls just this one folder straight into Scout's skills
+directory:
+
 ```bash
-mkdir -p ~/.copilot/skills
+mkdir -p ~/.copilot/skills && cd ~/.copilot/skills && \
+curl -sL https://github.com/KenDickMy/nerd-talk/archive/refs/heads/main.tar.gz \
+| tar -xz --strip-components=2 nerd-talk-main/scout-skills/meeting-prep
+```
+
+Already have the repo cloned? From the repo root:
+
+```bash
 cp -R scout-skills/meeting-prep ~/.copilot/skills/
 ```
 
-For a skill that should follow you across devices, use `~/.copilot/m-skills/`
-instead. Scout discovers skills automatically at the start of each conversation
-— no restart or registration step.
+Either way you end up with `~/.copilot/skills/meeting-prep/`. That's the whole
+install — Scout scans that directory at the start of each conversation, so
+there's nothing to register and no restart. Use `~/.copilot/m-skills/` instead
+if you want it to follow you across devices.
+
+To confirm it landed:
+
+```bash
+ls ~/.copilot/skills/meeting-prep
+```
 
 ## Use it
 

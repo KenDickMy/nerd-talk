@@ -24,17 +24,31 @@ against a checklist before writing anything.
 
 ## Install
 
-```bash
-mkdir -p ~/.claude/skills/skill-forge
-cp -r ./claude-skills/skill-forge/* ~/.claude/skills/skill-forge/
-```
-
-Project-scoped instead, so a whole repo gets it:
+Nothing to clone — this pulls just this one folder into your Claude skills
+directory:
 
 ```bash
-mkdir -p .claude/skills/skill-forge
-cp -r ./claude-skills/skill-forge/* .claude/skills/skill-forge/
+mkdir -p ~/.claude/skills && cd ~/.claude/skills && \
+curl -sL https://github.com/KenDickMy/nerd-talk/archive/refs/heads/main.tar.gz \
+| tar -xz --strip-components=2 nerd-talk-main/claude-skills/skill-forge
 ```
+
+From a clone of this repo instead, at the repo root:
+
+```bash
+cp -R claude-skills/skill-forge ~/.claude/skills/
+```
+
+Project-scoped, so a whole repo gets it — run this at the root of *that* repo:
+
+```bash
+mkdir -p .claude/skills && cd .claude/skills && \
+curl -sL https://github.com/KenDickMy/nerd-talk/archive/refs/heads/main.tar.gz \
+| tar -xz --strip-components=2 nerd-talk-main/claude-skills/skill-forge
+```
+
+Either way you want `SKILL.md` sitting at `<skills-dir>/skill-forge/SKILL.md`.
+Check with `ls ~/.claude/skills/skill-forge`.
 
 ## Using it
 

@@ -66,16 +66,21 @@ updated: 2026-07-24
 featured: true             # optional, surfaces it on the hub
 allowed_tools: [Bash, Read]
 install: |
-  mkdir -p ~/.claude/skills/your-skill
-  cp SKILL.md ~/.claude/skills/your-skill/
+  mkdir -p ~/.claude/skills && cd ~/.claude/skills && \
+  curl -sL https://github.com/KenDickMy/nerd-talk/archive/refs/heads/main.tar.gz \
+  | tar -xz --strip-components=2 nerd-talk-main/claude-skills/your-skill
 ---
 
 Body in Markdown. Convention here is a "What it does" section, the full
 `SKILL.md` in a fenced code block, and any notes or known rough edges.
 ```
 
-`install:` renders as a code block with a copy button. Everything else is
-optional except `title`, `category`, and `description`.
+`install:` renders as a code block with a copy button. Write it **self-contained**
+— whoever copies it is on the site, not in a clone of this repo, so a relative
+`cp` path will just fail for them. The tarball form above pulls a single folder
+without cloning anything.
+
+Everything else is optional except `title`, `category`, and `description`.
 
 ### Adding a guide
 
@@ -177,9 +182,36 @@ tier: user or workspace
 heartbeat: yes — writes only, never sends
 reaches: [Calendar, Mail, Teams]
 topics: [microsoft-365, calendar, briefing]
-install: cp -R scout-skills/meeting-prep ~/.copilot/skills/
+install: |
+  mkdir -p ~/.copilot/skills && cd ~/.copilot/skills && \
+  curl -sL https://github.com/KenDickMy/nerd-talk/archive/refs/heads/main.tar.gz \
+  | tar -xz --strip-components=2 nerd-talk-main/scout-skills/meeting-prep
 source: https://github.com/KenDickMy/nerd-talk/tree/main/scout-skills/meeting-prep
 ---
+```
+
+Note there's no `allowed_tools` — Scout has no such field, so there'd be nothing
+to list.
+
+### How installing actually works
+
+Scout has no installer and no registry. It scans these directories at the start
+of every conversation, and a folder containing a `SKILL.md` in any of them is a
+skill:
+
+| Directory | Scope |
+|---|---|
+| `~/.copilot/skills/` | This machine, all workspaces |
+| `~/.copilot/m-skills/` | Follows you across devices |
+| `~/.copilot/bundled-skills/` | Shipped by Microsoft, not editable |
+
+So "install" is a file copy. Keep the `install:` command in front matter
+self-contained — someone reading the site doesn't have this repo checked out:
+
+```bash
+mkdir -p ~/.copilot/skills && cd ~/.copilot/skills && \
+curl -sL https://github.com/KenDickMy/nerd-talk/archive/refs/heads/main.tar.gz \
+| tar -xz --strip-components=2 nerd-talk-main/scout-skills/<name>
 ```
 
 Guides go in `_scout_guides/`; categories are defined in

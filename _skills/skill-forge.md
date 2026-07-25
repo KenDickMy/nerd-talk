@@ -11,8 +11,9 @@ updated: 2026-07-24
 featured: true
 allowed_tools: [Read, Write, Glob, Grep]
 install: |
-  mkdir -p ~/.claude/skills/skill-forge
-  cp -r ./claude-skills/skill-forge/* ~/.claude/skills/skill-forge/
+  mkdir -p ~/.claude/skills && cd ~/.claude/skills && \
+  curl -sL https://github.com/KenDickMy/nerd-talk/archive/refs/heads/main.tar.gz \
+  | tar -xz --strip-components=2 nerd-talk-main/claude-skills/skill-forge
 ---
 
 ## What it does

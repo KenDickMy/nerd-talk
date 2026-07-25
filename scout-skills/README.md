@@ -10,16 +10,34 @@ two must agree.
 
 ## Install
 
-```bash
-# available everywhere on this machine
-cp -R scout-skills/<name> ~/.copilot/skills/
+Scout finds skills by scanning a few directories on disk. "Installing" a skill
+means nothing more than putting its folder in one of them — there's no registry,
+no install command, and no restart.
 
-# or, synced across your devices
-cp -R scout-skills/<name> ~/.copilot/m-skills/
+| Directory | Scope |
+|---|---|
+| `~/.copilot/skills/` | This machine, all workspaces |
+| `~/.copilot/m-skills/` | Follows you across devices |
+| `~/.copilot/bundled-skills/` | Shipped by Microsoft, not editable |
+
+Without cloning anything, replacing `<name>` with the skill folder:
+
+```bash
+mkdir -p ~/.copilot/skills && cd ~/.copilot/skills && \
+curl -sL https://github.com/KenDickMy/nerd-talk/archive/refs/heads/main.tar.gz \
+| tar -xz --strip-components=2 nerd-talk-main/scout-skills/<name>
 ```
 
-Scout also ships bundled skills in `~/.copilot/bundled-skills/`. Those are not
-editable — copy one out and rename it if you want to change how it behaves.
+Or, from the root of a clone of this repo:
+
+```bash
+cp -R scout-skills/<name> ~/.copilot/skills/
+```
+
+Scout picks it up at the start of the next conversation.
+
+Bundled skills are not editable — copy one out and rename it if you want to
+change how it behaves.
 
 ## Format
 
