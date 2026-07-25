@@ -1,0 +1,47 @@
+---
+layout: default
+---
+
+<article class="article">
+  <header class="article__header">
+    <div class="kicker">// Field Note</div>
+    <h1 class="display article__title">{{ page.title }}</h1>
+    <div class="article__meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+      {% if page.category %}<span class="sep">/</span><span>{{ page.category }}</span>{% endif %}
+      <span class="sep">/</span>
+      <span>{% include reading-time.html content=page.content %}</span>
+    </div>
+    {% if page.tags.size > 0 %}
+      <div class="card__tags">
+        {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+      </div>
+    {% endif %}
+  </header>
+
+  <div class="prose">
+    {{ content }}
+  </div>
+
+  <footer class="article__footer">
+    <a class="btn btn--ghost" href="{{ '/' | relative_url }}">&larr; All field notes</a>
+
+    {% if page.previous or page.next %}
+      <nav class="post-nav" aria-label="Post navigation">
+        {% if page.previous %}
+          <a href="{{ page.previous.url | relative_url }}">
+            <span class="dir">&larr; Previous</span>
+            <span class="label">{{ page.previous.title }}</span>
+          </a>
+        {% else %}<span></span>{% endif %}
+
+        {% if page.next %}
+          <a class="next" href="{{ page.next.url | relative_url }}">
+            <span class="dir">Next &rarr;</span>
+            <span class="label">{{ page.next.title }}</span>
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  </footer>
+</article>

@@ -1,0 +1,24 @@
+<article class="card">
+  <div class="card__meta">
+    <time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%b %d, %Y" }}</time>
+    {% if include.post.category %}<span class="sep">/</span><span>{{ include.post.category }}</span>{% endif %}
+    <span class="sep">/</span>
+    <span>{% include reading-time.html content=include.post.content %}</span>
+  </div>
+
+  <h2 class="card__title">
+    <a href="{{ include.post.url | relative_url }}">{{ include.post.title }}</a>
+  </h2>
+
+  <p class="card__excerpt">
+    {% if include.post.description %}{{ include.post.description }}{% else %}{{ include.post.excerpt | strip_html | truncate: 210 }}{% endif %}
+  </p>
+
+  <a class="card__more" href="{{ include.post.url | relative_url }}">Read the note &rarr;</a>
+
+  {% if include.post.tags.size > 0 %}
+    <div class="card__tags">
+      {% for tag in include.post.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+    </div>
+  {% endif %}
+</article>

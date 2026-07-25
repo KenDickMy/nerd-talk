@@ -1,0 +1,35 @@
+---
+layout: default
+---
+
+<section class="hero">
+  <div class="kicker">// Broadcasting from the frontier</div>
+  <h1 class="display">Field <span class="accent">Notes</span></h1>
+  <p>{{ site.description }}</p>
+</section>
+
+{{ content }}
+
+{% assign posts = paginator.posts | default: site.posts %}
+
+<div class="post-list">
+  {% for post in posts %}
+    {% include post-card.html post=post %}
+  {% else %}
+    <p class="card__excerpt">No notes dispatched yet. Check back soon.</p>
+  {% endfor %}
+</div>
+
+{% if paginator and paginator.total_pages > 1 %}
+  <nav class="pagination" aria-label="Pagination">
+    {% if paginator.previous_page %}
+      <a class="btn btn--ghost" href="{{ paginator.previous_page_path | relative_url }}">&larr; Newer</a>
+    {% else %}<span></span>{% endif %}
+
+    <span class="pagination__count">Page {{ paginator.page }} / {{ paginator.total_pages }}</span>
+
+    {% if paginator.next_page %}
+      <a class="btn btn--ghost" href="{{ paginator.next_page_path | relative_url }}">Older &rarr;</a>
+    {% else %}<span></span>{% endif %}
+  </nav>
+{% endif %}
