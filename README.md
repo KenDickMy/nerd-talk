@@ -105,6 +105,20 @@ permalink: /skills/categories/your-slug/
 Counts, category pages, and the topic index all derive from front matter — no
 lists to keep in sync.
 
+### Skill source vs. catalog entry
+
+Two things live in this repo for each skill:
+
+| | |
+|---|---|
+| `claude-skills/<name>/` | The **installable skill** — `SKILL.md`, `VERSION`, `README.md`, `reference/`. Excluded from the Jekyll build; browsable on GitHub. |
+| `_skills/<name>.md` | The **published page** on the site, which embeds that `SKILL.md` verbatim. |
+
+They have to agree, and the `SKILL.md` embedded in the catalog page must be the
+real file rather than a paraphrase. The
+[skill-forge](https://kendickmy.github.io/nerd-talk/skills/skill-forge/) skill
+generates both together so they can't drift — that's what it's for.
+
 ## Running it locally
 
 Requires Ruby and Bundler.
@@ -127,6 +141,7 @@ Then open <http://localhost:4000/nerd-talk/>.
 | `_posts/` | Blog posts, one Markdown file each |
 | `_skills/` | Skill catalog entries → `/skills/:name/` |
 | `_guides/` | Skill-writing guides → `/skills/guides/:name/` |
+| `claude-skills/` | Installable source for the skills (excluded from the build) |
 | `_data/skill_categories.yml` | Category definitions for the skills subsite |
 | `skills/` | Skills hub, topic index, guides index, category stubs |
 | `_layouts/` | `default`, `home`, `post`, `page`, `skill`, `guide`, `skill-category` |
