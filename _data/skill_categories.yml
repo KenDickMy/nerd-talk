@@ -1,0 +1,28 @@
+# Skill categories for the /skills/ subsite.
+# Rename freely — `slug` drives the URL and must match the `category:` field
+# in each skill's front matter, plus the filename under skills/categories/.
+
+- slug: development
+  name: Development
+  blurb: Writing, reviewing, refactoring, and debugging code.
+  icon: "M8 6 3 12l5 6M16 6l5 6-5 6"
+
+- slug: data-docs
+  name: Data & Docs
+  blurb: Wrangling spreadsheets, PDFs, and structured documents.
+  icon: "M4 5h10l6 6v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5zM14 5v6h6"
+
+- slug: automation
+  name: Automation
+  blurb: Multi-step workflows that run without hand-holding.
+  icon: "M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1M7.7 16.3l-2.1 2.1"
+
+- slug: writing
+  name: Writing
+  blurb: Drafting, editing, and keeping a consistent voice.
+  icon: "M4 20h4L20 8a2.8 2.8 0 0 0-4-4L4 16v4zM14 6l4 4"
+
+- slug: devops
+  name: DevOps
+  blurb: Pipelines, infrastructure, deploys, and incident response.
+  icon: "M4 7h16M4 12h16M4 17h16M8 5v4M16 10v4M11 15v4"

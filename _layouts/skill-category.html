@@ -1,0 +1,33 @@
+---
+layout: default
+---
+
+{%- assign cat = site.data.skill_categories | where: "slug", page.category | first -%}
+{%- assign skills = site.skills | where: "category", page.category | sort: "title" -%}
+
+<section class="hero hero--tight">
+  <div class="kicker">
+    <a class="kicker__link" href="{{ '/skills/' | relative_url }}">// Skills</a>
+  </div>
+  <h1 class="display">{{ cat.name }}</h1>
+  <p>{{ cat.blurb }}</p>
+</section>
+
+{% include skills-subnav.html %}
+
+<div class="skill-grid">
+  {% for skill in skills %}
+    {% include skill-card.html skill=skill %}
+  {% else %}
+    <p class="card__excerpt">Nothing in this category yet.</p>
+  {% endfor %}
+</div>
+
+<nav class="cat-strip" aria-label="Other categories">
+  <span class="kicker">// Jump to</span>
+  {% for c in site.data.skill_categories %}
+    {% unless c.slug == page.category %}
+      <a class="tag" href="{{ '/skills/categories/' | append: c.slug | append: '/' | relative_url }}">{{ c.name }}</a>
+    {% endunless %}
+  {% endfor %}
+</nav>

@@ -11,6 +11,14 @@ baseurl: "/nerd-talk"
 permalink: /posts/:year/:month/:title/
 timezone: America/Chicago
 
+collections:
+  skills:
+    output: true
+    permalink: /skills/:name/
+  guides:
+    output: true
+    permalink: /skills/guides/:name/
+
 markdown: kramdown
 highlighter: rouge
 kramdown:
@@ -40,12 +48,24 @@ defaults:
       layout: post
   - scope:
       path: ""
+      type: skills
+    values:
+      layout: skill
+  - scope:
+      path: ""
+      type: guides
+    values:
+      layout: guide
+  - scope:
+      path: ""
     values:
       layout: page
 
 nav:
   - title: Field Notes
     url: /
+  - title: Skills
+    url: /skills/
   - title: Archive
     url: /archive/
   - title: About

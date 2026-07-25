@@ -1,0 +1,58 @@
+---
+layout: default
+title: Claude Skills
+permalink: /skills/
+description: A catalog of Claude Skills, organised by category and topic, plus guides on writing your own.
+---
+
+<section class="hero hero--tight">
+  <div class="kicker">// Claude Skills</div>
+  <h1 class="display">Skill <span class="accent">Library</span></h1>
+  <p>{{ page.description }}</p>
+</section>
+
+{% include skills-subnav.html %}
+
+<section class="cat-grid">
+  {% for cat in site.data.skill_categories %}
+    {% assign count = site.skills | where: "category", cat.slug | size %}
+    <a class="cat-card" href="{{ '/skills/categories/' | append: cat.slug | append: '/' | relative_url }}">
+      <svg class="cat-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+        <path d="{{ cat.icon }}"/>
+      </svg>
+      <h2 class="cat-card__name">{{ cat.name }}</h2>
+      <p class="cat-card__blurb">{{ cat.blurb }}</p>
+      <span class="cat-card__count">{{ count }} skill{% unless count == 1 %}s{% endunless %}</span>
+    </a>
+  {% endfor %}
+</section>
+
+{% assign featured = site.skills | where: "featured", true %}
+{% if featured.size > 0 %}
+  <section class="section">
+    <h2 class="section__head">Featured</h2>
+    <div class="skill-grid">
+      {% for skill in featured %}
+        {% include skill-card.html skill=skill %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
+<section class="section">
+  <h2 class="section__head">Every skill</h2>
+  <div class="skill-grid">
+    {% assign all_skills = site.skills | sort: "title" %}
+    {% for skill in all_skills %}
+      {% include skill-card.html skill=skill %}
+    {% else %}
+      <p class="card__excerpt">No skills published yet.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="callout">
+  <h2 class="callout__title">Writing your own?</h2>
+  <p>The guides cover the anatomy of a <code>SKILL.md</code>, how progressive disclosure keeps your context lean, and the mistakes worth skipping.</p>
+  <a class="btn" href="{{ '/skills/guides/' | relative_url }}">Read the guides &rarr;</a>
+</section>

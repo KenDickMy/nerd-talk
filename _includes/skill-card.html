@@ -1,0 +1,16 @@
+{%- assign cat = site.data.skill_categories | where: "slug", include.skill.category | first -%}
+<article class="skill-card">
+  <div class="skill-card__top">
+    <a class="skill-card__title" href="{{ include.skill.url | relative_url }}">{{ include.skill.title }}</a>
+    {% if include.skill.status %}<span class="status status--{{ include.skill.status }}">{{ include.skill.status }}</span>{% endif %}
+  </div>
+
+  <p class="skill-card__desc">{{ include.skill.description }}</p>
+
+  <div class="skill-card__foot">
+    {% if cat %}<a class="tag" href="{{ '/skills/categories/' | append: cat.slug | append: '/' | relative_url }}">{{ cat.name }}</a>{% endif %}
+    {% for topic in include.skill.topics limit: 3 %}
+      <span class="chip">{{ topic }}</span>
+    {% endfor %}
+  </div>
+</article>

@@ -1,0 +1,6 @@
+{%- assign current = page.url | remove: 'index.html' -%}
+<nav class="subnav" aria-label="Skills sections">
+  <a href="{{ '/skills/' | relative_url }}"{% if current == '/skills/' %} aria-current="page"{% endif %}>All skills</a>
+  <a href="{{ '/skills/topics/' | relative_url }}"{% if current == '/skills/topics/' %} aria-current="page"{% endif %}>Topics</a>
+  <a href="{{ '/skills/guides/' | relative_url }}"{% if current == '/skills/guides/' %} aria-current="page"{% endif %}>Guides</a>
+</nav>
