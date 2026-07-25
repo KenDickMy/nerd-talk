@@ -21,7 +21,10 @@ topics:
   - briefing
   - heartbeat
   - read-only
-install: cp -R scout-skills/meeting-prep ~/.copilot/skills/
+install: |
+  mkdir -p ~/.copilot/skills && cd ~/.copilot/skills && \
+  curl -sL https://github.com/KenDickMy/nerd-talk/archive/refs/heads/main.tar.gz \
+  | tar -xz --strip-components=2 nerd-talk-main/scout-skills/meeting-prep
 source: https://github.com/KenDickMy/nerd-talk/tree/main/scout-skills/meeting-prep
 ---
 
@@ -51,13 +54,21 @@ nobody there to approve anything, so the skill writes its file and stops.
 
 ## Install
 
+There's no installer and no registry — Scout just scans a few directories on
+disk, so "installing" means putting the folder in one of them.
+
+This pulls only this skill's folder, no clone required:
+
 ```bash
-mkdir -p ~/.copilot/skills
-cp -R scout-skills/meeting-prep ~/.copilot/skills/
+mkdir -p ~/.copilot/skills && cd ~/.copilot/skills && \
+curl -sL https://github.com/KenDickMy/nerd-talk/archive/refs/heads/main.tar.gz \
+| tar -xz --strip-components=2 nerd-talk-main/scout-skills/meeting-prep
 ```
 
-Use `~/.copilot/m-skills/` instead if you want it synced across devices. Scout
-discovers skills at the start of each conversation — nothing to register.
+You should end up with `~/.copilot/skills/meeting-prep/SKILL.md`. Swap in
+`~/.copilot/m-skills/` if you'd rather it followed you across devices. Scout
+reads it at the start of the next conversation — nothing to register, no
+restart.
 
 ## Use it
 
