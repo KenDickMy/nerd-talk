@@ -3,6 +3,11 @@
 Personal blog / field-notes site, built with **Jekyll** and published by
 **GitHub Pages** at <https://kendickmy.github.io/nerd-talk/>.
 
+Three sections: the blog, a [Claude skills](https://kendickmy.github.io/nerd-talk/skills/)
+catalog, and a [Microsoft Scout skills](https://kendickmy.github.io/nerd-talk/scout/)
+catalog. The two skill sections are deliberately separate — the formats differ
+more than they look.
+
 ## Writing a post
 
 Drop a Markdown file into `_posts/` named `YYYY-MM-DD-slug.md`:
@@ -119,6 +124,68 @@ real file rather than a paraphrase. The
 [skill-forge](https://kendickmy.github.io/nerd-talk/skills/skill-forge/) skill
 generates both together so they can't drift — that's what it's for.
 
+## The Scout subsite
+
+`/scout/` is a parallel catalog for **Microsoft Scout** skills. It works the
+same way — collections, categories, topics, guides — but it's separate on
+purpose, because the format genuinely differs.
+
+### What's different from Claude
+
+| | Claude | Scout |
+|---|---|---|
+| Front matter | `name`, `description`, `allowed-tools` | **`description` only** |
+| Identifier | `name` field | The folder name |
+| Permissions | Per-skill `allowed-tools` | Global three-tier, in Settings > Permissions |
+| Install path | `~/.claude/skills/` | `~/.copilot/skills/` or `~/.copilot/m-skills/` |
+
+The one that bites: **Scout has no per-skill tool list.** Port a Claude skill
+across and its `allowed-tools` line is silently ignored — a read-only skill
+becomes a skill that merely says it's read-only. See
+[Scout skills aren't Claude skills](https://kendickmy.github.io/nerd-talk/scout/guides/scout-vs-claude-skills/).
+
+### Adding a Scout skill
+
+Same two-part split as Claude skills:
+
+| | |
+|---|---|
+| `scout-skills/<name>/` | The **installable skill**. Excluded from the build. |
+| `_scout_skills/<name>.md` | The **published page**, embedding that `SKILL.md` verbatim. |
+
+The source `SKILL.md` takes exactly one front matter field:
+
+```yaml
+---
+description: "What it does. Use when <the situations that should trigger it>."
+---
+```
+
+The catalog page front matter is Scout-flavoured — no `allowed_tools`, since
+there's nothing to list:
+
+```yaml
+---
+title: Meeting Prep
+description: >-
+  One or two lines for the card.
+category: microsoft-365
+status: stable          # stable | beta | draft
+version: 0.1.0
+updated: 2026-02-19
+tier: user or workspace
+heartbeat: yes — writes only, never sends
+reaches: [Calendar, Mail, Teams]
+topics: [microsoft-365, calendar, briefing]
+install: cp -R scout-skills/meeting-prep ~/.copilot/skills/
+source: https://github.com/KenDickMy/nerd-talk/tree/main/scout-skills/meeting-prep
+---
+```
+
+Guides go in `_scout_guides/`; categories are defined in
+`_data/scout_categories.yml` with a matching stub in `scout/categories/`,
+exactly as on the Claude side.
+
 ## Running it locally
 
 Requires Ruby and Bundler.
@@ -142,9 +209,14 @@ Then open <http://localhost:4000/nerd-talk/>.
 | `_skills/` | Skill catalog entries → `/skills/:name/` |
 | `_guides/` | Skill-writing guides → `/skills/guides/:name/` |
 | `claude-skills/` | Installable source for the skills (excluded from the build) |
+| `_scout_skills/` | Scout catalog entries → `/scout/:name/` |
+| `_scout_guides/` | Scout guides → `/scout/guides/:name/` |
+| `scout-skills/` | Installable source for Scout skills (excluded from the build) |
 | `_data/skill_categories.yml` | Category definitions for the skills subsite |
+| `_data/scout_categories.yml` | Category definitions for the Scout subsite |
 | `skills/` | Skills hub, topic index, guides index, category stubs |
-| `_layouts/` | `default`, `home`, `post`, `page`, `skill`, `guide`, `skill-category` |
+| `scout/` | Scout hub, topic index, guides index, category stubs |
+| `_layouts/` | `default`, `home`, `post`, `page`, `skill`, `guide`, `skill-category`, `scout-skill`, `scout-guide`, `scout-category` |
 | `_includes/` | Header, footer, head, post card, skill card, subnav, glyph, reading time |
 | `assets/css/main.css` | The entire design system |
 | `assets/js/theme.js` | Light/dark toggle, persisted to `localStorage` |

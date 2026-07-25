@@ -18,6 +18,12 @@ collections:
   guides:
     output: true
     permalink: /skills/guides/:name/
+  scout_skills:
+    output: true
+    permalink: /scout/:name/
+  scout_guides:
+    output: true
+    permalink: /scout/guides/:name/
 
 markdown: kramdown
 highlighter: rouge
@@ -58,6 +64,16 @@ defaults:
       layout: guide
   - scope:
       path: ""
+      type: scout_skills
+    values:
+      layout: scout-skill
+  - scope:
+      path: ""
+      type: scout_guides
+    values:
+      layout: scout-guide
+  - scope:
+      path: ""
     values:
       layout: page
 
@@ -66,6 +82,8 @@ nav:
     url: /
   - title: Skills
     url: /skills/
+  - title: Scout
+    url: /scout/
   - title: Archive
     url: /archive/
   - title: About
@@ -81,3 +99,4 @@ exclude:
   - README.md
   - .github
   - claude-skills
+  - scout-skills

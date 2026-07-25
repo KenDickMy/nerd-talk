@@ -1,0 +1,45 @@
+---
+layout: default
+title: Scout Topics
+permalink: /scout/topics/
+description: Every topic tag across the Scout skill catalog.
+---
+
+<section class="hero hero--tight">
+  <div class="kicker">
+    <a class="kicker__link" href="{{ '/scout/' | relative_url }}">// Scout</a>
+  </div>
+  <h1 class="display">Topics</h1>
+  <p>{{ page.description }}</p>
+</section>
+
+{% include skills-subnav.html base="/scout" label="All skills" %}
+
+{% assign topics = site.scout_skills | map: "topics" | compact | join: "," | split: "," | uniq | sort %}
+
+{% if topics.size > 0 %}
+  <div class="topic-cloud">
+    {% for topic in topics %}
+      {% assign count = 0 %}
+      {% for skill in site.scout_skills %}
+        {% if skill.topics contains topic %}{% assign count = count | plus: 1 %}{% endif %}
+      {% endfor %}
+      <a class="chip chip--lg" href="#{{ topic | slugify }}">{{ topic }} <span class="chip__count">{{ count }}</span></a>
+    {% endfor %}
+  </div>
+
+  {% for topic in topics %}
+    <section class="section" id="{{ topic | slugify }}">
+      <h2 class="section__head">{{ topic }}</h2>
+      <div class="skill-grid">
+        {% for skill in site.scout_skills %}
+          {% if skill.topics contains topic %}
+            {% include skill-card.html skill=skill base="/scout" categories=site.data.scout_categories %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+{% else %}
+  <p class="card__excerpt">No topics yet — add a <code>topics:</code> list to a skill's front matter.</p>
+{% endif %}

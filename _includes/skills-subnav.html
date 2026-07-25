@@ -1,6 +1,15 @@
+{%- comment -%}
+  include.base  — "/skills" or "/scout"
+  include.label — text for the first link
+{%- endcomment -%}
+{%- assign base = include.base | default: '/skills' -%}
+{%- assign label = include.label | default: 'All skills' -%}
 {%- assign current = page.url | remove: 'index.html' -%}
-<nav class="subnav" aria-label="Skills sections">
-  <a href="{{ '/skills/' | relative_url }}"{% if current == '/skills/' %} aria-current="page"{% endif %}>All skills</a>
-  <a href="{{ '/skills/topics/' | relative_url }}"{% if current == '/skills/topics/' %} aria-current="page"{% endif %}>Topics</a>
-  <a href="{{ '/skills/guides/' | relative_url }}"{% if current == '/skills/guides/' %} aria-current="page"{% endif %}>Guides</a>
+{%- assign root = base | append: '/' -%}
+{%- assign topics_url = base | append: '/topics/' -%}
+{%- assign guides_url = base | append: '/guides/' -%}
+<nav class="subnav" aria-label="Section navigation">
+  <a href="{{ root | relative_url }}"{% if current == root %} aria-current="page"{% endif %}>{{ label }}</a>
+  <a href="{{ topics_url | relative_url }}"{% if current == topics_url %} aria-current="page"{% endif %}>Topics</a>
+  <a href="{{ guides_url | relative_url }}"{% if current == guides_url %} aria-current="page"{% endif %}>Guides</a>
 </nav>

@@ -1,0 +1,33 @@
+---
+layout: default
+title: Scout Guides
+permalink: /scout/guides/
+description: How Scout skills actually work — the format, the permission model, and the traps.
+---
+
+<section class="hero hero--tight">
+  <div class="kicker">
+    <a class="kicker__link" href="{{ '/scout/' | relative_url }}">// Scout</a>
+  </div>
+  <h1 class="display">Guides</h1>
+  <p>{{ page.description }}</p>
+</section>
+
+{% include skills-subnav.html base="/scout" label="All skills" %}
+
+<div class="post-list">
+  {% assign guides = site.scout_guides | sort: "order" %}
+  {% for guide in guides %}
+    <article class="card">
+      <div class="card__meta">
+        {% if guide.level %}<span>{{ guide.level }}</span><span class="sep">/</span>{% endif %}
+        <span>{% include reading-time.html content=guide.content %}</span>
+      </div>
+      <h2 class="card__title"><a href="{{ guide.url | relative_url }}">{{ guide.title }}</a></h2>
+      <p class="card__excerpt">{{ guide.description }}</p>
+      <a class="card__more" href="{{ guide.url | relative_url }}">Read the guide &rarr;</a>
+    </article>
+  {% else %}
+    <p class="card__excerpt">No guides yet.</p>
+  {% endfor %}
+</div>

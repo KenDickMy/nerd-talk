@@ -1,0 +1,32 @@
+# Categories for the /scout/ subsite.
+# These deliberately differ from _data/skill_categories.yml — they're organised
+# around what Scout can reach (M365, browser, background modes) rather than
+# around general task domains.
+#
+# `slug` drives the URL and must match the `category:` field in each skill's
+# front matter, plus the filename under scout/categories/.
+
+- slug: microsoft-365
+  name: Microsoft 365
+  blurb: Mail, calendar, Teams, OneDrive, and WorkIQ workflows.
+  icon: "M4 6h7v7H4zM13 6h7v7h-7zM4 15h7v3H4zM13 15h7v3h-7z"
+
+- slug: background
+  name: Background
+  blurb: Heartbeat routines and scheduled automations that run without you.
+  icon: "M12 7v5l3 2M3 12a9 9 0 1 0 9-9 9 9 0 0 0-6.4 2.6L3 8"
+
+- slug: documents
+  name: Documents
+  blurb: Word, Excel, PowerPoint, and Loop — creating and editing at scale.
+  icon: "M4 5h10l6 6v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5zM14 5v6h6M8 15h8"
+
+- slug: browser
+  name: Browser
+  blurb: Playwright-driven web workflows — portals, forms, and scraping.
+  icon: "M3 9h18M3 5h18v14H3zM7 7h.01M10 7h.01"
+
+- slug: development
+  name: Development
+  blurb: Shell, git, and repo work on your local machine.
+  icon: "M8 6 3 12l5 6M16 6l5 6-5 6"

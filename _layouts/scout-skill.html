@@ -1,0 +1,62 @@
+---
+layout: default
+---
+
+{%- assign cat = site.data.scout_categories | where: "slug", page.category | first -%}
+
+<article class="article article--wide">
+  <header class="article__header">
+    <div class="kicker">
+      {% if cat %}
+        <a class="kicker__link" href="{{ '/scout/categories/' | append: cat.slug | append: '/' | relative_url }}">// Scout · {{ cat.name }}</a>
+      {% else %}// Scout Skill{% endif %}
+    </div>
+
+    <h1 class="display article__title">{{ page.title }}</h1>
+    <p class="lede">{{ page.description }}</p>
+
+    <dl class="spec">
+      {% if page.status %}<div><dt>Status</dt><dd><span class="status status--{{ page.status }}">{{ page.status }}</span></dd></div>{% endif %}
+      {% if page.version %}<div><dt>Version</dt><dd>{{ page.version }}</dd></div>{% endif %}
+      {% if page.updated %}<div><dt>Updated</dt><dd><time datetime="{{ page.updated | date_to_xmlschema }}">{{ page.updated | date: "%b %d, %Y" }}</time></dd></div>{% endif %}
+      {% if page.tier %}<div><dt>Tier</dt><dd>{{ page.tier }}</dd></div>{% endif %}
+      {% if page.heartbeat %}<div><dt>Heartbeat</dt><dd>{{ page.heartbeat }}</dd></div>{% endif %}
+      {% if page.reaches %}<div><dt>Reaches</dt><dd>{{ page.reaches | join: ", " }}</dd></div>{% endif %}
+    </dl>
+
+    {% if page.topics.size > 0 %}
+      <div class="card__tags">
+        {% for topic in page.topics %}
+          {% assign anchor = topic | slugify %}
+          <a class="chip" href="{{ '/scout/topics/' | relative_url }}#{{ anchor }}">{{ topic }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </header>
+
+  <div class="notice">
+    <strong>Scout format.</strong> Front matter is <code>description</code> only — the folder name is the
+    identifier, and there is no per-skill tool list. Permissions come from Scout's global three-tier
+    system instead. See
+    <a href="{{ '/scout/guides/scout-vs-claude-skills/' | relative_url }}">Scout skills aren't Claude skills</a>.
+  </div>
+
+  {% if page.install %}
+    <section class="install">
+      <div class="install__head">
+        <span class="kicker">// Install</span>
+        <button class="copy-btn" type="button" data-copy-target="install-cmd">Copy</button>
+      </div>
+      <pre id="install-cmd"><code>{{ page.install }}</code></pre>
+    </section>
+  {% endif %}
+
+  <div class="prose">
+    {{ content }}
+  </div>
+
+  <footer class="article__footer">
+    <a class="btn btn--ghost" href="{{ '/scout/' | relative_url }}">&larr; All Scout skills</a>
+    {% if page.source %}<a class="btn" href="{{ page.source }}">View source &rarr;</a>{% endif %}
+  </footer>
+</article>
