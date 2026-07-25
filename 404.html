@@ -1,0 +1,25 @@
+---
+layout: default
+title: "404 · Signal Lost"
+permalink: /404.html
+sitemap: false
+---
+
+<style>
+  .lost { text-align: center; padding: 40px 0 60px; }
+  .lost__glyph { width: 96px; height: 96px; margin: 0 auto 24px; animation: drift 3.2s ease-in-out infinite; }
+  @keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .lost h1 { font-size: clamp(3rem, 10vw, 5.5rem); letter-spacing: 0.04em; }
+  .lost .code { margin: 18px 0 10px; }
+  .lost p.msg { font-size: 0.85rem; color: var(--cp-muted); letter-spacing: 0.05em; max-width: 46ch; margin: 0 auto 32px; }
+  @media (prefers-reduced-motion: reduce) { .lost__glyph { animation: none; } }
+</style>
+
+<div class="lost">
+  {% include glyph.html class="lost__glyph" %}
+
+  <h1 class="display">Signal <span class="accent">Lost</span></h1>
+  <div class="code kicker">// ERROR 404 · NO FIELD NOTES AT THIS FREQUENCY</div>
+  <p class="msg">The page you're scanning for doesn't exist out here on the frontier. It may have been moved, renamed, or never dispatched at all.</p>
+  <a class="btn" href="{{ '/' | relative_url }}">&larr; Return to base camp</a>
+</div>

@@ -1,0 +1,62 @@
+title: Lifelongnerd
+tagline: Nerd talk for the masses
+description: >-
+  Field notes from the frontier of software, hardware, and the stubborn
+  curiosity that keeps a lifelong nerd tinkering.
+author: Ken Dick
+
+url: "https://kendickmy.github.io"
+baseurl: "/nerd-talk"
+
+permalink: /posts/:year/:month/:title/
+timezone: America/Chicago
+
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+paginate: 8
+paginate_path: /page/:num/
+
+feed:
+  path: /feed.xml
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+    values:
+      layout: page
+
+nav:
+  - title: Field Notes
+    url: /
+  - title: Archive
+    url: /archive/
+  - title: About
+    url: /about/
+
+social:
+  github: KenDickMy
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md
+  - .github
