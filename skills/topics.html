@@ -1,0 +1,45 @@
+---
+layout: default
+title: Topics
+permalink: /skills/topics/
+description: Every topic tag across the skill library.
+---
+
+<section class="hero hero--tight">
+  <div class="kicker">
+    <a class="kicker__link" href="{{ '/skills/' | relative_url }}">// Skills</a>
+  </div>
+  <h1 class="display">Topics</h1>
+  <p>{{ page.description }}</p>
+</section>
+
+{% include skills-subnav.html %}
+
+{% assign topics = site.skills | map: "topics" | compact | join: "," | split: "," | uniq | sort %}
+
+{% if topics.size > 0 %}
+  <div class="topic-cloud">
+    {% for topic in topics %}
+      {% assign count = 0 %}
+      {% for skill in site.skills %}
+        {% if skill.topics contains topic %}{% assign count = count | plus: 1 %}{% endif %}
+      {% endfor %}
+      <a class="chip chip--lg" href="#{{ topic | slugify }}">{{ topic }} <span class="chip__count">{{ count }}</span></a>
+    {% endfor %}
+  </div>
+
+  {% for topic in topics %}
+    <section class="section" id="{{ topic | slugify }}">
+      <h2 class="section__head">{{ topic }}</h2>
+      <div class="skill-grid">
+        {% for skill in site.skills %}
+          {% if skill.topics contains topic %}
+            {% include skill-card.html skill=skill %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+{% else %}
+  <p class="card__excerpt">No topics yet — add a <code>topics:</code> list to a skill's front matter.</p>
+{% endif %}

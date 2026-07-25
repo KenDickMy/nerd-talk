@@ -38,6 +38,73 @@ permalink: /uses/
 
 Then add it to the `nav:` list in `_config.yml` to get it in the header.
 
+## The Skills subsite
+
+`/skills/` is a catalog of Claude Skills plus guides on writing them. It runs on
+two Jekyll collections.
+
+### Adding a skill
+
+Create `_skills/your-skill.md`. The filename becomes the URL
+(`/skills/your-skill/`).
+
+```markdown
+---
+title: Your Skill
+category: development      # must match a slug in _data/skill_categories.yml
+topics: [git, testing]     # free-form; drives /skills/topics/
+description: >-
+  One or two sentences, shown on every card.
+status: stable             # stable | beta | experimental
+version: 1.0.0
+updated: 2026-07-24
+featured: true             # optional, surfaces it on the hub
+allowed_tools: [Bash, Read]
+install: |
+  mkdir -p ~/.claude/skills/your-skill
+  cp SKILL.md ~/.claude/skills/your-skill/
+---
+
+Body in Markdown. Convention here is a "What it does" section, the full
+`SKILL.md` in a fenced code block, and any notes or known rough edges.
+```
+
+`install:` renders as a code block with a copy button. Everything else is
+optional except `title`, `category`, and `description`.
+
+### Adding a guide
+
+Create `_guides/your-guide.md` → `/skills/guides/your-guide/`.
+
+```markdown
+---
+title: Your Guide
+level: Beginner            # Beginner | Intermediate | Advanced
+order: 4                   # sort position on the guides index
+updated: 2026-07-24
+description: >-
+  Shown on the guides index.
+---
+```
+
+### Adding or renaming a category
+
+1. Edit `_data/skill_categories.yml` — `slug`, `name`, `blurb`, and `icon`
+   (an SVG path `d` for a 24×24 stroked icon).
+2. Add a matching stub at `skills/categories/<slug>.html`:
+
+```html
+---
+layout: skill-category
+title: Your Category Skills
+category: your-slug
+permalink: /skills/categories/your-slug/
+---
+```
+
+Counts, category pages, and the topic index all derive from front matter — no
+lists to keep in sync.
+
 ## Running it locally
 
 Requires Ruby and Bundler.
@@ -56,12 +123,17 @@ Then open <http://localhost:4000/nerd-talk/>.
 
 | Path | Purpose |
 |---|---|
-| `_config.yml` | Site settings, nav, plugins, pagination |
+| `_config.yml` | Site settings, nav, collections, plugins, pagination |
 | `_posts/` | Blog posts, one Markdown file each |
-| `_layouts/` | `default`, `home`, `post`, `page` |
-| `_includes/` | Header, footer, head, post card, glyph, reading time |
+| `_skills/` | Skill catalog entries → `/skills/:name/` |
+| `_guides/` | Skill-writing guides → `/skills/guides/:name/` |
+| `_data/skill_categories.yml` | Category definitions for the skills subsite |
+| `skills/` | Skills hub, topic index, guides index, category stubs |
+| `_layouts/` | `default`, `home`, `post`, `page`, `skill`, `guide`, `skill-category` |
+| `_includes/` | Header, footer, head, post card, skill card, subnav, glyph, reading time |
 | `assets/css/main.css` | The entire design system |
 | `assets/js/theme.js` | Light/dark toggle, persisted to `localStorage` |
+| `assets/js/copy.js` | Copy-to-clipboard for install blocks |
 | `index.html` | Paginated post feed |
 | `archive.html` | All posts grouped by year |
 | `about.md` | About page |
