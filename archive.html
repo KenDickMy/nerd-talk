@@ -6,6 +6,8 @@ permalink: /archive/
 description: The complete run of field notes, newest first.
 ---
 
+<p class="lede">Prefer themes over chronology? <a href="{{ '/topics/' | relative_url }}">Browse by topic &rarr;</a></p>
+
 {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
 
 {% for year in posts_by_year %}

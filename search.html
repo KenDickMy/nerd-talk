@@ -1,0 +1,39 @@
+---
+layout: default
+title: Search
+permalink: /search/
+description: Search every field note, skill, and guide on the site.
+---
+
+<section class="hero hero--tight">
+  <div class="kicker">// Scanning all frequencies</div>
+  <h1 class="display">Search <span class="accent">the Site</span></h1>
+  <p>{{ page.description }} Everything runs in your browser — no tracking, no external service.</p>
+</section>
+
+<form class="search-form" role="search" action="{{ '/search/' | relative_url }}" method="get">
+  <label class="skip-link" for="search-input">Search query</label>
+  <input
+    class="search-input"
+    type="search"
+    id="search-input"
+    name="q"
+    placeholder="Try &quot;jekyll&quot;, &quot;skill&quot;, &quot;post-mortem&quot;&hellip;"
+    autocomplete="off"
+    autofocus
+  />
+  <button class="btn" type="submit">Scan</button>
+</form>
+
+<p class="search-count kicker" id="search-count" aria-live="polite"></p>
+
+<div class="post-list" id="search-results"></div>
+
+<noscript>
+  <p class="card__excerpt">Search needs JavaScript. Without it, the <a href="{{ '/archive/' | relative_url }}">archive</a> and <a href="{{ '/topics/' | relative_url }}">topics</a> pages cover the same ground.</p>
+</noscript>
+
+<script>
+  window.__searchIndexUrl = "{{ '/search.json' | relative_url }}";
+</script>
+<script src="{{ '/assets/js/search.js' | relative_url }}" defer></script>

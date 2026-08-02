@@ -1,0 +1,35 @@
+---
+layout: page
+title: Topics
+kicker: Field notes, by theme
+permalink: /topics/
+description: Every field note on the site, grouped by tag.
+---
+
+{% assign sorted_tags = site.tags | sort %}
+
+{% if sorted_tags.size > 0 %}
+  <div class="topic-cloud">
+    {% for tag in sorted_tags %}
+      {% assign anchor = tag[0] | slugify %}
+      <a class="chip chip--lg" href="#{{ anchor }}">{{ tag[0] }}<span class="chip__count">{{ tag[1] | size }}</span></a>
+    {% endfor %}
+  </div>
+
+  {% for tag in sorted_tags %}
+    {% assign anchor = tag[0] | slugify %}
+    <section class="section">
+      <h2 class="section__head" id="{{ anchor }}">{{ tag[0] }}</h2>
+      <ul class="archive-list">
+        {% for post in tag[1] %}
+          <li>
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %d, %Y" }}</time>
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+{% else %}
+  <p>No topics yet — tags show up here as soon as posts carry them.</p>
+{% endif %}

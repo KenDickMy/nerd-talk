@@ -14,7 +14,7 @@ layout: default
     </div>
     {% if page.tags.size > 0 %}
       <div class="card__tags">
-        {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+        {% for tag in page.tags %}{% assign anchor = tag | slugify %}<a class="tag" href="{{ '/topics/' | relative_url }}#{{ anchor }}">{{ tag }}</a>{% endfor %}
       </div>
     {% endif %}
   </header>

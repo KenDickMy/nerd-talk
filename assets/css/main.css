@@ -654,3 +654,143 @@ a.chip:hover { color: var(--cp-accent); border-color: var(--cp-accent); }
 }
 .notice a { white-space: nowrap; }
 .notice--lead { margin-bottom: 40px; }
+
+/* ==========================================================================
+   Header icon buttons — search link shares the theme-toggle look
+   ========================================================================== */
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  color: var(--cp-text);
+  border: 2px solid var(--cp-text);
+  box-shadow: 3px 3px 0 var(--cp-text);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.icon-btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--cp-text); }
+a.icon-btn[aria-current="page"] { color: var(--cp-accent); border-color: var(--cp-accent); }
+
+/* ==========================================================================
+   Featured card — latest dispatch on the homepage
+   ========================================================================== */
+
+.card--feature { border-width: 3px; box-shadow: 8px 8px 0 var(--cp-accent); }
+.card--feature:hover { transform: translate(-3px, -3px); box-shadow: 11px 11px 0 var(--cp-accent); }
+.card--feature .card__kicker { margin-bottom: 12px; }
+.card--feature .card__title { font-size: clamp(2rem, 6vw, 3.1rem); }
+
+/* ==========================================================================
+   Code copy buttons & heading anchors
+   ========================================================================== */
+
+.code-wrap { position: relative; }
+.code-wrap .code-copy {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--cp-surface);
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s, color 0.15s;
+}
+.code-wrap:hover .code-copy,
+.code-wrap .code-copy:focus-visible,
+.code-wrap .code-copy[data-copied="true"] { opacity: 1; }
+@media (hover: none) { .code-wrap .code-copy { opacity: 1; } }
+
+.h-anchor {
+  margin-left: 0.45em;
+  font-size: 0.8em;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.prose h2:hover .h-anchor,
+.prose h3:hover .h-anchor,
+.prose h4:hover .h-anchor,
+.h-anchor:focus-visible { opacity: 1; }
+
+/* ==========================================================================
+   Search
+   ========================================================================== */
+
+.search-form { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+
+.search-input {
+  flex: 1 1 260px;
+  font-family: var(--cp-mono);
+  font-size: 0.95rem;
+  color: var(--cp-text);
+  background: var(--cp-surface);
+  border: 2px solid var(--cp-text);
+  border-radius: 0;
+  box-shadow: var(--cp-shadow);
+  padding: 13px 16px;
+}
+.search-input::placeholder { color: var(--cp-muted); }
+
+.search-count { min-height: 1.2em; margin-bottom: 26px; }
+
+.card--result { padding: 18px 20px; }
+.card__title--sm { font-size: clamp(1.3rem, 3vw, 1.7rem); }
+
+mark { background: var(--cp-accent-soft); color: var(--cp-accent); padding: 0 2px; }
+
+/* ==========================================================================
+   Rouge syntax highlighting — matched to the site palette
+   ========================================================================== */
+
+:root {
+  --syn-comment: #77809b;
+  --syn-keyword: #b11f4b;
+  --syn-string: #1a7f52;
+  --syn-number: #9a6b12;
+  --syn-func: #2456a6;
+  --syn-type: #7a3fa0;
+}
+
+[data-theme="dark"] {
+  --syn-comment: #8b90a6;
+  --syn-keyword: #ef6a95;
+  --syn-string: #5fc794;
+  --syn-number: #d9a441;
+  --syn-func: #7fa7ff;
+  --syn-type: #c08ae6;
+}
+
+.highlight .c, .highlight .c1, .highlight .cm,
+.highlight .cd, .highlight .cs, .highlight .cp,
+.highlight .gp { color: var(--syn-comment); font-style: italic; }
+
+.highlight .k, .highlight .kd, .highlight .kn,
+.highlight .kp, .highlight .kr, .highlight .kv,
+.highlight .kc, .highlight .nt, .highlight .ow { color: var(--syn-keyword); }
+
+.highlight .s, .highlight .s1, .highlight .s2,
+.highlight .sa, .highlight .sb, .highlight .sc,
+.highlight .sd, .highlight .se, .highlight .sh,
+.highlight .si, .highlight .sr, .highlight .sx,
+.highlight .ss { color: var(--syn-string); }
+
+.highlight .m, .highlight .mb, .highlight .mf,
+.highlight .mh, .highlight .mi, .highlight .mo,
+.highlight .mx, .highlight .il, .highlight .no,
+.highlight .na { color: var(--syn-number); }
+
+.highlight .nf, .highlight .fm, .highlight .nb,
+.highlight .bp, .highlight .nl { color: var(--syn-func); }
+
+.highlight .kt, .highlight .nc, .highlight .nd,
+.highlight .ne { color: var(--syn-type); }
+
+.highlight .gh, .highlight .gu { font-weight: 700; }
+.highlight .gd { color: var(--syn-keyword); background: var(--cp-accent-soft); }
+.highlight .gi { color: var(--syn-string); background: rgba(26, 127, 82, 0.10); }
+.highlight .err { color: var(--syn-keyword); }
+
+/* Anchored targets clear the sticky header when jumped to */
+.prose h2[id], .prose h3[id], .prose h4[id], .section__head[id] { scroll-margin-top: 96px; }

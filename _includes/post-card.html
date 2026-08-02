@@ -1,4 +1,5 @@
-<article class="card">
+<article class="card{% if include.featured %} card--feature{% endif %}">
+  {% if include.featured %}<div class="card__kicker kicker">// Latest dispatch</div>{% endif %}
   <div class="card__meta">
     <time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%b %d, %Y" }}</time>
     {% if include.post.category %}<span class="sep">/</span><span>{{ include.post.category }}</span>{% endif %}
@@ -18,7 +19,7 @@
 
   {% if include.post.tags.size > 0 %}
     <div class="card__tags">
-      {% for tag in include.post.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+      {% for tag in include.post.tags %}{% assign anchor = tag | slugify %}<a class="tag" href="{{ '/topics/' | relative_url }}#{{ anchor }}">{{ tag }}</a>{% endfor %}
     </div>
   {% endif %}
 </article>

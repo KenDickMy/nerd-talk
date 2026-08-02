@@ -4,7 +4,8 @@
 <script>
   (() => {
     const stored = localStorage.getItem("cp-theme");
-    document.documentElement.setAttribute("data-theme", stored || "light");
+    const system = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", stored || system);
   })();
 </script>
 

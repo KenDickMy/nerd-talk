@@ -267,3 +267,17 @@ the whole site follows.
 - Display: Big Shoulders Display
 - Body: IBM Plex Mono
 - Accent: `#b11f4b` (light) / `#dd4d7b` (dark)
+
+## Search, topics, and social cards
+
+- **Search** lives at `/search/` (magnifier icon in the header). It's fully
+  client-side: `search.json` is a Liquid-generated index of posts, skills, and
+  guides, and `assets/js/search.js` scores matches in the browser. No external
+  service, nothing to configure — new content is indexed automatically at build.
+- **Topics** (`/topics/`) groups every post by tag. Tag chips on cards and
+  posts link straight to the matching section.
+- **Social cards**: `assets/og-card.png` is the default Open Graph image
+  (set site-wide in `_config.yml` defaults). Give any post its own card by
+  adding `image: /path/to/image.png` to its front matter.
+- **Theme** now follows the visitor's OS preference on first visit; the toggle
+  still wins once clicked.

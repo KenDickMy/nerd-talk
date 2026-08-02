@@ -11,10 +11,15 @@ layout: default
 {{ content }}
 
 {% assign posts = paginator.posts | default: site.posts %}
+{% assign page_num = paginator.page | default: 1 %}
 
 <div class="post-list">
   {% for post in posts %}
-    {% include post-card.html post=post %}
+    {% if forloop.first and page_num == 1 %}
+      {% include post-card.html post=post featured=true %}
+    {% else %}
+      {% include post-card.html post=post %}
+    {% endif %}
   {% else %}
     <p class="card__excerpt">No notes dispatched yet. Check back soon.</p>
   {% endfor %}
@@ -33,3 +38,33 @@ layout: default
     {% else %}<span></span>{% endif %}
   </nav>
 {% endif %}
+
+<section class="section" aria-label="Beyond the field notes">
+  <h2 class="section__head">Beyond the notes</h2>
+  <div class="cat-grid">
+    <a class="cat-card" href="{{ '/skills/' | relative_url }}">
+      <svg class="cat-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+        <path d="M8 6 3 12l5 6M16 6l5 6-5 6"/>
+      </svg>
+      <h3 class="cat-card__name">Claude Skill Library</h3>
+      <p class="cat-card__blurb">A catalog of Claude Skills, organised by category and topic, plus guides on writing your own.</p>
+      <span class="cat-card__count">{{ site.skills | size }} skill{% unless site.skills.size == 1 %}s{% endunless %} &middot; {{ site.guides | size }} guide{% unless site.guides.size == 1 %}s{% endunless %}</span>
+    </a>
+    <a class="cat-card" href="{{ '/scout/' | relative_url }}">
+      <svg class="cat-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+        <path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1M7.7 16.3l-2.1 2.1"/>
+      </svg>
+      <h3 class="cat-card__name">Microsoft Scout Skills</h3>
+      <p class="cat-card__blurb">Custom skills for Microsoft Scout — a different format with different guardrails, catalogued separately on purpose.</p>
+      <span class="cat-card__count">{{ site.scout_skills | size }} skill{% unless site.scout_skills.size == 1 %}s{% endunless %} &middot; {{ site.scout_guides | size }} guide{% unless site.scout_guides.size == 1 %}s{% endunless %}</span>
+    </a>
+    <a class="cat-card" href="{{ '/topics/' | relative_url }}">
+      <svg class="cat-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+        <path d="M4 5h7l2 2h7v12H4zM4 9h16"/>
+      </svg>
+      <h3 class="cat-card__name">Browse by Topic</h3>
+      <p class="cat-card__blurb">Every field note, grouped by tag — architecture, tooling, post-mortems, and whatever else got written down.</p>
+      <span class="cat-card__count">{{ site.tags | size }} topic{% unless site.tags.size == 1 %}s{% endunless %} &middot; {{ site.posts | size }} note{% unless site.posts.size == 1 %}s{% endunless %}</span>
+    </a>
+  </div>
+</section>
